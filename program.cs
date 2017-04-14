@@ -1,4 +1,5 @@
-﻿public class Program
+namespace B17_Ex01_5﻿
+public class Program
 {
      public static class Constants
      {
