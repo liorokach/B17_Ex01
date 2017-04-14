@@ -1,0 +1,7 @@
+C:\Users\oznas\onedrive\documents\visual studio 2015\Projects\Solution1\B17_Ex01_03\bin\Debug\B17_Ex01_03.exe
+C:\Users\oznas\onedrive\documents\visual studio 2015\Projects\Solution1\B17_Ex01_03\bin\Debug\B17_Ex01_03.pdb
+C:\Users\oznas\onedrive\documents\visual studio 2015\Projects\Solution1\B17_Ex01_03\obj\Debug\B17_Ex01_03.exe
+C:\Users\oznas\onedrive\documents\visual studio 2015\Projects\Solution1\B17_Ex01_03\obj\Debug\B17_Ex01_03.pdb
+C:\Users\oznas\onedrive\documents\visual studio 2015\Projects\Solution1\B17_Ex01_03\obj\Debug\B17_Ex01_03.csprojResolveAssemblyReference.cache
+C:\Users\oznas\onedrive\documents\visual studio 2015\Projects\Solution1\B17_Ex01_03\bin\Debug\B17_Ex01_02.exe
+C:\Users\oznas\onedrive\documents\visual studio 2015\Projects\Solution1\B17_Ex01_03\bin\Debug\B17_Ex01_02.pdb
