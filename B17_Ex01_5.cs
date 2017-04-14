@@ -69,7 +69,7 @@
           int maxDig = 0;
           while (i_Num != 0) 
           {
-               maxDig = maxDig < i_Num % 10 ? i_Num % 10 : maxDig;
+               maxDig = System.Math.Max(maxDig, i_Num % 10);
                i_Num /= 10;
           }
 
@@ -81,7 +81,7 @@
           int minDig = 10;
           while (i_Num != 0)
           {
-               minDig = minDig > i_Num % 10 ? i_Num % 10 : minDig;
+               minDig = System.Math.Min(minDig, i_Num % 10);
                i_Num /= 10;
           }
 
