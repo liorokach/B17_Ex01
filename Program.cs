@@ -1,4 +1,8 @@
-﻿using System.Text;
+﻿////Ex01Q1
+////Lior Rokach & Oz Nasi 15.04.17
+////This program get 3 positive integers from user and convert the numbers to their binary value and print/
+////Additionally it calculate and print the average digits of binary number, the average value of the integer input number and how many numbers are ascending and decreasing 
+using System.Text;
 
 namespace B17_Ex01_1
 {
@@ -9,7 +13,7 @@ namespace B17_Ex01_1
                public const int k_NumOfInputs = 3; // number of input from user
           }
 
-          public static void Main()  ////this method is the main
+          public static void Main()
           {
                Ex01Q1Manager();
           }
@@ -26,14 +30,14 @@ namespace B17_Ex01_1
                PrintResult(countAscending, countDecreasing, avgDigInBinNum, avgValueFromInput); // printing the result format
           }
 
-          public static int PrintBinaryNumbers(int[] decNumbers)
+          public static int PrintBinaryNumbers(int[] i_decNumbers)
           {
                string binaryStr;
                int countDigits = 0;
                System.Console.Write("The binary numbers are: ");
                for (int i = 0; i < Constants.k_NumOfInputs; i++)
                {
-                    binaryStr = ConvertToBinary(decNumbers[i]); // convert decimal to binary and print the binary value
+                    binaryStr = ConvertToBinary(i_decNumbers[i]); // convert decimal to binary and print the binary value
                     System.Console.Write(binaryStr);
                     countDigits += binaryStr.Length; // add the num of digits of the binary number
                     System.Console.Write(i == Constants.k_NumOfInputs - 1 ? "\n" : " "); // print 'space' ,  or 'endline' at the last number to print 
@@ -42,7 +46,7 @@ namespace B17_Ex01_1
                return countDigits;
           }
 
-          public static int[] GetValidInput(ref int io_CountUp, ref int io_CountDown)
+          public static int[] GetValidInput(ref int o_CountUp, ref int o_CountDown)
           {
                int[] decNumberArr = new int[Constants.k_NumOfInputs];
                string inputNumByStr;
@@ -53,14 +57,14 @@ namespace B17_Ex01_1
                     int.TryParse(inputNumByStr, out decNumberArr[i]); // check if input is positive number  
                     while (decNumberArr[i] == 0 || inputNumByStr.Length != 3)
                     {
-                         i = io_CountDown = io_CountUp = 0;
+                         i = o_CountDown = o_CountUp = 0;
                          System.Console.WriteLine("The input you entered is invalid. Please try again."); // inform the user that his input invalid
                          inputNumByStr = System.Console.ReadLine();
                          int.TryParse(inputNumByStr, out decNumberArr[i]);
                     }
 
-                    io_CountUp += IsIncreasing(inputNumByStr.ToString()); // increment if the number's digits are increasing
-                    io_CountDown += IsIncreasing(ReverseString(inputNumByStr).ToString()); // increment if the number's digits are decreasing
+                    o_CountUp += IsIncreasing(inputNumByStr.ToString()); // increment if the number's digits are increasing
+                    o_CountDown += IsIncreasing(ReverseString(inputNumByStr).ToString()); // increment if the number's digits are decreasing
                }
 
                return decNumberArr;
