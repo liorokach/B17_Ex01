@@ -11,6 +11,7 @@ namespace B17_Ex01_1
           public static class Constants
           {
                public const int k_NumOfInputs = 3; // number of input from user
+               public const int k_InputLen = 3; // number of input from user
           }
 
           public static void Main()
@@ -58,7 +59,7 @@ namespace B17_Ex01_1
                {
                     inputNumByStr = System.Console.ReadLine(); // get input from user
                     int.TryParse(inputNumByStr, out decNumberArr[i]); // check if input is positive number  
-                    while (decNumberArr[i] == 0 || inputNumByStr.Length != 3)
+                    while (decNumberArr[i] == 0 || inputNumByStr.Length != Constants.k_InputLen)
                     {
                          i = o_CountDown = o_CountUp = 0;
                          System.Console.WriteLine("The input you entered is invalid. Please try again."); // inform the user that his input invalid
