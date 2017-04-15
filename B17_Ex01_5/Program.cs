@@ -90,18 +90,19 @@ namespace B17_Ex01_5
                char maxDig = '0';
                for (int i = 0; i < Constants.k_InputLen; i++)
                {
-                    maxDig = (char)(System.Math.Max(maxDig - '0', i_NumStr[i] - '0')+'0');
+                    maxDig = (char)(System.Math.Max(maxDig - '0', i_NumStr[i] - '0') + '0');
                }
 
                return maxDig;
           }
+
           /*this function get string and return the smallest char value of the string number*/
           public static char GetMinDigit(string i_NumStr)
           {
                char minDig = '9';
                for (int i = 0; i < Constants.k_InputLen; i++)
                {
-                    minDig = (char)(System.Math.Min(minDig - '0', i_NumStr[i] - '0')+'0');
+                    minDig = (char)(System.Math.Min(minDig - '0', i_NumStr[i] - '0') + '0');
                }
 
                return minDig;
