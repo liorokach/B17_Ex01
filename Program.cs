@@ -1,4 +1,4 @@
-﻿////Ex01Q1
+﻿////Ex01_Q1
 ////Lior Rokach & Oz Nasi 15.04.17
 ////This program get 3 positive integers from user and convert the numbers to their binary value and print
 ////Additionally it calculate and print the average digits of binary number, the average value of the integer input number and how many numbers are ascending and decreasing 
@@ -18,7 +18,7 @@ namespace B17_Ex01_1
                Ex01Q1Manager();
           }
 
-          /*this function manage the exercise*/
+          /*this function manage the program*/
           public static void Ex01Q1Manager()
           {
                int[] decNums = new int[Constants.k_NumOfInputs];
@@ -105,6 +105,7 @@ namespace B17_Ex01_1
                return reverseStr;
           }
 
+          /*this function get string and return 1 if the string is asending series and 0 if not */
           public static int IsIncreasing(string i_TextNumber)
           {
                char previous = (char)('0' - 1);
@@ -121,7 +122,8 @@ namespace B17_Ex01_1
                return 1;
           }
 
-          public static string ConvertToBinary(int i_DecNum) ////this method convert dec to binary
+          /*this function convert integer(decimal) to binary as string and return the binary string*/
+          public static string ConvertToBinary(int i_DecNum) 
           {
                string binaryStr = string.Empty;
                while (i_DecNum > 0)
