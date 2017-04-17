@@ -1,4 +1,14 @@
-﻿using System;
+﻿////Ex01_Q2
+////Lior Rokach & Oz Nasi 15.04.17
+////the program print sand clock with hight = 5
+////
+////    *****
+////     ***
+////      *
+////     ***
+////    ***** 
+
+using System;
 
 namespace B17_Ex01_02
 {
