@@ -33,7 +33,7 @@ namespace B17_Ex01_1
           }
 
           /*this function get input from user and check if it valid while check if the input is series(ascending\descending), return the input as integer array + by ref counter of ascending and descending number */
-          public static int[] GetValidInputAndCheckSeries(ref int o_CountUp, ref int o_CountDown)
+          public static int[] GetValidInputAndCheckSeries(ref int io_CountUp, ref int io_CountDown)
           {
                int[] decNumberArr = new int[Constants.k_NumOfInputs];
                string inputNumByStr;
@@ -44,14 +44,14 @@ namespace B17_Ex01_1
                     int.TryParse(inputNumByStr, out decNumberArr[i]); // check if input is positive number  
                     while (decNumberArr[i] == 0 || inputNumByStr.Length != Constants.k_InputLen)
                     {
-                         i = o_CountDown = o_CountUp = 0; ////zeroing the counting and the index
+                         i = io_CountDown = io_CountUp = 0; ////zeroing the counting and the index
                          System.Console.WriteLine("The input you entered is invalid. Please try again."); // inform the user that his input invalid
                          inputNumByStr = System.Console.ReadLine();
                          int.TryParse(inputNumByStr, out decNumberArr[i]);
                     }
 
-                    o_CountUp += IsIncreasing(inputNumByStr.ToString()); // increment if the number's digits are increasing
-                    o_CountDown += IsIncreasing(ReverseString(inputNumByStr).ToString()); // increment if the number's digits are decreasing
+                    io_CountUp += IsIncreasing(inputNumByStr.ToString()); // increment if the number's digits are increasing
+                    io_CountDown += IsIncreasing(ReverseString(inputNumByStr).ToString()); // increment if the number's digits are decreasing
                }
 
                return decNumberArr;
