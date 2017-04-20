@@ -2,18 +2,13 @@
 ////Lior Rokach & Oz Nasi 15.04.17
 ////This program get 3 positive integers from user and convert the numbers to their binary value and print
 ////Additionally it calculate and print the average digits of binary number, the average value of the integer input number and how many numbers are ascending and decreasing 
+using System;
 using System.Text;
 
 namespace B17_Ex01_1
 {
      public class Program
      {
-          public static class Constants
-          {
-               public const int k_NumOfInputs = 3; // number of input from user
-               public const int k_InputLen = 3; // number of input from user
-          }
-
           public static void Main()
           {
                Ex01Q1Manager();
@@ -22,60 +17,91 @@ namespace B17_Ex01_1
           /*this function manage the program*/
           public static void Ex01Q1Manager()
           {
-               int[] decNums = new int[Constants.k_NumOfInputs];
-               int countDigitsOfTheBin = 0, countAscending = 0, countDescending = 0;
+               int[] decNumsArr = new int[3];
+               string[] NumbersInStrArr = new string[3];
+               string[] BinaryArrInStr = new string[3];
+               int countAscending = 0, countDescending = 0; 
                float avgValueFromInput, avgDigInBinNum;
-               decNums = GetValidInputAndCheckSeries(ref countAscending, ref countDescending);
-               countDigitsOfTheBin = PrintBinaryNumbers(decNums);
-               avgValueFromInput = CalculateAvgValue(decNums); // calculte the average value of a input from user number(decimal)
-               avgDigInBinNum = (float)countDigitsOfTheBin / Constants.k_NumOfInputs; // calculate the number of digits in the average binary number
+               decNumsArr = GetValidInput(ref NumbersInStrArr);
+               countAscending = CheckAscending(NumbersInStrArr);
+               countDescending = CheckDescending(NumbersInStrArr);
+               BinaryArrInStr = GetBinaryValue(decNumsArr);
+               PrintBinaryNumbers(BinaryArrInStr);
+               avgValueFromInput = CalculateAvgInputValue(decNumsArr); // calculte the average value of a input from user number(decimal)
+               avgDigInBinNum = CalculateAvgBinaryLen(BinaryArrInStr); // calculate the number of digits in the average binary number
                PrintResult(countAscending, countDescending, avgDigInBinNum, avgValueFromInput); // printing the result format
           }
 
           /*this function get input from user and check if it valid while check if the input is series(ascending\descending), return the input as integer array + by ref counter of ascending and descending number */
-          public static int[] GetValidInputAndCheckSeries(ref int io_CountUp, ref int io_CountDown)
+          public static int[] GetValidInput(ref string[] io_StrNumsArr)
           {
-               int[] decNumberArr = new int[Constants.k_NumOfInputs];
+               int[] decNumberArr = new int[3];
                string inputNumByStr;
-               System.Console.WriteLine("Please enter 3 positive numbers with 3 digits each:");
-               for (int i = 0; i < Constants.k_NumOfInputs; i++)
+               Console.WriteLine("Please enter 3 positive numbers with 3 digits each:");
+               for (int i = 0; i < 3; i++)
                {
-                    inputNumByStr = System.Console.ReadLine(); // get input from user
-                    int.TryParse(inputNumByStr, out decNumberArr[i]); // check if input is positive number  
-                    while (decNumberArr[i] == 0 || inputNumByStr.Length != Constants.k_InputLen)
+                    inputNumByStr = Console.ReadLine(); // get input from user
+                    bool validNum = int.TryParse(inputNumByStr, out decNumberArr[i]); // check if input is positive number  
+                    while (decNumberArr[i] == 0 || !validNum || inputNumByStr.Length != 3) 
                     {
-                         i = io_CountDown = io_CountUp = 0; ////zeroing the counting and the index
-                         System.Console.WriteLine("The input you entered is invalid. Please try again."); // inform the user that his input invalid
-                         inputNumByStr = System.Console.ReadLine();
-                         int.TryParse(inputNumByStr, out decNumberArr[i]);
+                         i = 0; ////zeroing the index
+                         Console.WriteLine("The input you entered is invalid. Please try again."); // inform the user that his input invalid
+                         inputNumByStr = Console.ReadLine();
+                         validNum = int.TryParse(inputNumByStr, out decNumberArr[i]);
                     }
 
-                    io_CountUp += IsIncreasing(inputNumByStr.ToString()); // increment if the number's digits are increasing
-                    io_CountDown += IsIncreasing(ReverseString(inputNumByStr).ToString()); // increment if the number's digits are decreasing
+                    io_StrNumsArr[i] = inputNumByStr;
                }
 
                return decNumberArr;
           }
 
-          /*this function get integer array and print the binary value of the integer arrray decimal numbers,additionally the function count the number of digits of all the binary numbers and return that */
-          public static int PrintBinaryNumbers(int[] i_decNumbers)
+          public static int CheckAscending(string[] i_NumbersInStrArr)
           {
-               string binaryStr;
-               int countDigits = 0;
-               System.Console.Write("The binary numbers are: ");
-               for (int i = 0; i < Constants.k_NumOfInputs; i++)
+               int countAsending = 0;
+               for (int i = 0; i < i_NumbersInStrArr.Length; i++)
                {
-                    binaryStr = ConvertToBinary(i_decNumbers[i]); // convert decimal to binary and print the binary value
-                    System.Console.Write(binaryStr);
-                    countDigits += binaryStr.Length; // add the num of digits of the binary number
-                    System.Console.Write(i == Constants.k_NumOfInputs - 1 ? "\n" : " "); // print 'space' ,  or 'endline' at the last number to print 
+                    countAsending += IsIncreasing(i_NumbersInStrArr[i]); // increment if the number's digits are increasing
                }
 
-               return countDigits;
+               return countAsending;
+          }
+
+          public static int CheckDescending(string[] i_NumbersInStrArr)
+          {
+               int countDescending = 0;
+               for (int i = 0; i < i_NumbersInStrArr.Length; i++)
+               {
+                    countDescending += IsIncreasing(ReverseString(i_NumbersInStrArr[i]).ToString()); // increment if the number's digits are decreasing
+               }
+
+               return countDescending;
+          }
+
+          public static string[] GetBinaryValue(int[] i_DecNumbers)
+          {
+               string[] binaryStr = new string[i_DecNumbers.Length];
+               for (int i = 0; i < i_DecNumbers.Length; i++)
+               {
+                    binaryStr[i] = ConvertToBinary(i_DecNumbers[i]); // convert decimal to binary value as string
+               }
+
+               return binaryStr;
+          }
+
+          /*this function get integer array and print the binary value of the integer arrray decimal numbers,additionally the function count the number of digits of all the binary numbers and return that */
+          public static void PrintBinaryNumbers(string[] i_BinaryNumbers)
+          {
+               Console.Write("The binary numbers are: ");
+               for (int i = 0; i < i_BinaryNumbers.Length; i++)
+               {
+                    Console.Write(i_BinaryNumbers[i]);
+                    Console.Write(i == i_BinaryNumbers.Length - 1 ? "\n" : " "); // print 'space' ,  or 'endline' at the last number to print 
+               }
           }
 
           /*this function get an integer array and calculate+return the average value of the numbers*/
-          public static float CalculateAvgValue(int[] i_IntArray)
+          public static float CalculateAvgInputValue(int[] i_IntArray)
           {
                int sumOfNums = 0;
                for (int i = 0; i < i_IntArray.Length; i++)
@@ -84,6 +110,17 @@ namespace B17_Ex01_1
                }
 
                return (float)sumOfNums / i_IntArray.Length; // return the average by divine the sum with the number of numbers
+          }
+
+          public static float CalculateAvgBinaryLen(string[] i_BinaryArr)
+          {
+               int countDigits = 0;
+               for (int i = 0; i < i_BinaryArr.Length; i++)
+               {
+                    countDigits += i_BinaryArr[i].Length; 
+               }
+
+               return (float)countDigits / i_BinaryArr.Length; // return the average by divine the sum of digits with the number of BinaryNumbers
           }
 
           /*this function get a string and reverse it and return the reverse string as stringbuilder*/
@@ -132,9 +169,9 @@ namespace B17_Ex01_1
           public static void PrintResult(int i_AscendingCount, int i_DescendingCount, float i_AvgNumOfDigInBin, float i_AvgOfInsertNums)
           {
                string printSeriesResult = string.Format("There are {0} numbers which are an ascending series and {1} which are descending.", i_AscendingCount, i_DescendingCount);
-               System.Console.WriteLine(printSeriesResult);
-               System.Console.WriteLine("The average number of digits in the binary number is " + i_AvgNumOfDigInBin.ToString());
-               System.Console.WriteLine("The general average of the inserted numbers is " + i_AvgOfInsertNums.ToString());
+               Console.WriteLine(printSeriesResult);
+               Console.WriteLine("The average number of digits in the binary number is " + i_AvgNumOfDigInBin.ToString());
+               Console.WriteLine("The general average of the inserted numbers is " + i_AvgOfInsertNums.ToString());
           }
      }
 }
