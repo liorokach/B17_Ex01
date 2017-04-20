@@ -22,7 +22,7 @@ namespace B17_Ex01_1
                string[] BinaryArrInStr = new string[3];
                int countAscending = 0, countDescending = 0; 
                float avgValueFromInput, avgDigInBinNum;
-               decNumsArr = GetValidInput(ref NumbersInStrArr);
+               decNumsArr = GetValidInput(NumbersInStrArr);
                countAscending = CheckAscending(NumbersInStrArr);
                countDescending = CheckDescending(NumbersInStrArr);
                BinaryArrInStr = GetBinaryValue(decNumsArr);
@@ -33,7 +33,7 @@ namespace B17_Ex01_1
           }
 
           /*this function get input from user and check if it valid while check if the input is series(ascending\descending), return the input as integer array + by ref counter of ascending and descending number */
-          public static int[] GetValidInput(ref string[] io_StrNumsArr)
+          public static int[] GetValidInput(string[] io_StrNumsArr)
           {
                int[] decNumberArr = new int[3];
                string inputNumByStr;
