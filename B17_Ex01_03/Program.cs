@@ -27,13 +27,17 @@ namespace B17_Ex01_03
 
         public static void AdvancedSandClock()
         {
-            Console.WriteLine("Please enter the hight of the sand clock ! \n");
-            string hightString = Console.ReadLine();
-            int numOfLoop;
-            bool isInputValid = ValidateInput(hightString);
-            if (isInputValid)
+            int numOfLoop, hight;
+            bool isInputValid;
+            string hightString;
+            do
             {
-                int hight = int.Parse(hightString);
+                Console.WriteLine("Please enter the hight of the sand clock ! \n");
+                hightString = Console.ReadLine();
+                isInputValid = ValidateInput(hightString, out hight);
+            }
+            while (!isInputValid);
+
                 StringBuilder starString = new StringBuilder(hight);
                 if (hight % 2 == 0)
                 {
@@ -61,54 +65,41 @@ namespace B17_Ex01_03
                 {
                     Console.WriteLine("*");
                 }
-            }
-            else
+        }
+
+        public static bool ValidateInput(string i_StrHight, out int io_Hight)
+        {
+            return int.TryParse(i_StrHight, out io_Hight);
+        }
+
+        public static void InitiateStarString(int i_Hight, ref StringBuilder io_StarString)
+        {
+            for (int i = 0; i < i_Hight; i++)
             {
-                Console.WriteLine("input invalid");
+                io_StarString.Insert(i, "*");
             }
         }
 
-        public static bool ValidateInput(string io_strHight)
+        public static void PrintBegeiningOfSandClock(int i_NumOfLoop, int i_Hight, ref StringBuilder io_StarString)
         {
-            foreach (char c in io_strHight)
+            for (int i = 0; i < i_NumOfLoop; i++)
             {
-                if (c < '0' || c > '9')
+                Console.WriteLine(io_StarString);
+                if (i != i_NumOfLoop - 1)
                 {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        public static void InitiateStarString(int i_hight, ref StringBuilder io_starString)
-        {
-            for (int i = 0; i < i_hight; i++)
-            {
-                io_starString.Insert(i, "*");
-            }
-        }
-
-        public static void PrintBegeiningOfSandClock(int i_numOfLoop, int i_hight, ref StringBuilder io_starString)
-        {
-            for (int i = 0; i < i_numOfLoop; i++)
-            {
-                Console.WriteLine(io_starString);
-                if (i != i_numOfLoop - 1)
-                {
-                    io_starString.Replace("*", " ", i, 1);
-                    io_starString.Replace("*", " ", i_hight - i - 1, 1);
+                    io_StarString.Replace("*", " ", i, 1);
+                    io_StarString.Replace("*", " ", i_Hight - i - 1, 1);
                 }
             }
         }
 
-        public static void PrintEndOfSandClock(int i_numOfLoop, int i_hight, ref StringBuilder io_starString)
+        public static void PrintEndOfSandClock(int i_NumOfLoop, int i_Hight, ref StringBuilder io_StarString)
         {
-            for (int i = i_numOfLoop - 1; i >= 0; i--)
+            for (int i = i_NumOfLoop - 1; i >= 0; i--)
             {
-                io_starString.Replace(" ", "*", i, 1);
-                io_starString.Replace(" ", "*", i_hight - i - 1, 1);
-                Console.WriteLine(io_starString);
+                io_StarString.Replace(" ", "*", i, 1);
+                io_StarString.Replace(" ", "*", i_Hight - i - 1, 1);
+                Console.WriteLine(io_StarString);
             }
         }
     }
