@@ -5,8 +5,6 @@
 ////the program indicate if the string is palindroom,
 ////or if the string contains only letter it counts how many camel letter in string and print it.
 
-
-
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -23,11 +21,16 @@ namespace B17_Ex01_04
         public static void analayzeString()
         {
             int avgOfStr, numsOfUpperCase;
-            Console.WriteLine("please enter your string, English Or Numbers only!\n");
-            string strfromUser = Console.ReadLine();
-            bool isInputValid = ValidteInput(strfromUser);
-            if (isInputValid)
+            bool isInputValid;
+            string strfromUser;
+            do
             {
+                Console.WriteLine("please enter your string, English Or Numbers only!\n");
+                strfromUser = Console.ReadLine();
+                isInputValid = ValidteInput(strfromUser);
+            }
+            while (!isInputValid);
+
                 StringBuilder str = new StringBuilder(strfromUser, 8);
                 string reversedStr = ReverseString(str.ToString());
                 if (str.Equals(reversedStr))
@@ -47,20 +50,15 @@ namespace B17_Ex01_04
                     string strCamelCaseMsg = string.Format("The number of upper case is: {0}", numsOfUpperCase);
                     Console.WriteLine(strCamelCaseMsg);
                 }
-            }
-            else
-            {
-                Console.WriteLine("input invalid");
-            }
         }
 
-        public static int GetNumOfCamelCase(string i_str)
+        public static int GetNumOfCamelCase(string i_Str)
         {
             int howManyCamel = 0;
-            int sizeStr = i_str.Length;
+            int sizeStr = i_Str.Length;
             for (int i = 0; i < sizeStr; i++)
             {
-                if (i_str[i] >= 'A' && i_str[i] <= 'Z')
+                if (i_Str[i] >= 'A' && i_Str[i] <= 'Z')
                 {
                     howManyCamel++;
                 }
@@ -69,18 +67,18 @@ namespace B17_Ex01_04
             return howManyCamel;
         }
 
-        public static bool ValidteInput(string i_strFromUser)
+        public static bool ValidteInput(string i_StrFromUser)
         {
             bool isAllNumbers, isAllLetters;
-            isAllNumbers = ValidteInputNumber(i_strFromUser);
-            isAllLetters = ValidteInputLetter(i_strFromUser);
+            isAllNumbers = ValidteInputNumber(i_StrFromUser);
+            isAllLetters = ValidteInputLetter(i_StrFromUser);
 
-            return (isAllLetters || isAllNumbers) && i_strFromUser.Length == 8;
+            return (isAllLetters || isAllNumbers) && i_StrFromUser.Length == 8;
         }
 
-        public static bool ValidteInputNumber(string i_strFromUser)
+        public static bool ValidteInputNumber(string i_StrFromUser)
         {
-            foreach (char c in i_strFromUser)
+            foreach (char c in i_StrFromUser)
             {
                 if (c < '0' || c > '9')
                 {
@@ -91,9 +89,9 @@ namespace B17_Ex01_04
             return true;
         }
 
-        public static bool ValidteInputLetter(string i_strFromUser)
+        public static bool ValidteInputLetter(string i_StrFromUser)
         {
-            foreach (char c in i_strFromUser)
+            foreach (char c in i_StrFromUser)
             {
                 if (c < 'A' || c > 'z')
                 {
@@ -104,26 +102,26 @@ namespace B17_Ex01_04
             return true;
         }
 
-        public static int GetAvarageFromStrNumbers(string i_str)
+        public static int GetAvarageFromStrNumbers(string i_Str)
         {
             int avg, sum = 0;
-            int sizeStr = i_str.Length;
+            int sizeStr = i_Str.Length;
             for (int i = 0; i < sizeStr; i++)
             {
-                sum += i_str[i] - '0';
+                sum += i_Str[i] - '0';
             }
 
             return avg = sum / sizeStr;
         }
 
-        public static string ReverseString(string i_str)
+        public static string ReverseString(string i_Str)
         {
-            int sizeStr = i_str.Length;
+            int sizeStr = i_Str.Length;
             string reversedStr = string.Empty;
 
             for (int i = sizeStr - 1; i >= 0; i--)
             {
-                reversedStr += i_str[i];
+                reversedStr += i_Str[i];
             }
 
             return reversedStr;
